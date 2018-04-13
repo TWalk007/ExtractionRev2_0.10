@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/Prototype_0.10.unity
+- path: Assets/_Scenes/PerlinNoise_LagueTut.unity
   isLoaded: 1
   isActive: 1
