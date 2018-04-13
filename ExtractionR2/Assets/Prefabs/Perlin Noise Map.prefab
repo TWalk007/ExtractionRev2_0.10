@@ -81,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 1454403613955102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 16, y: 1, z: 16}
   m_Children: []
   m_Father: {fileID: 4935865692332992}
   m_RootOrder: 0
@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  mapWidth: 100
-  mapHeight: 100
+  mapWidth: 16
+  mapHeight: 16
   noiseScale: 30
   octaves: 4
   persistance: 0.881
