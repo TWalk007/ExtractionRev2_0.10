@@ -8,6 +8,7 @@ public class MapGeneratorLague : MonoBehaviour {
 
     public int mapWidth;
     public int mapHeight;
+    public int textureSizeDPI = 64;
     public float noiseScale;
 
     [Range(1, 25)]
@@ -21,26 +22,53 @@ public class MapGeneratorLague : MonoBehaviour {
     public Vector2 offset;
 
     public bool autoUpdate;
+    public bool createTileMap;  // If this is checked it places the Texture2D that is in the "Terrain Tex" slot of each region.
 
     public TerrainType[] regions;
 
+    [System.Serializable]
+    public struct TerrainType {
+        public string name;
+        public float height;
+        public Color color;
+        public Texture2D terrainTex;
+    }
 
     public void GenerateMap() {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
         Color[] colorMap = new Color[mapWidth * mapHeight];
-        for (int y = 0; y < mapHeight; y++) {
-            for (int x = 0; x < mapWidth; x++) {
-                float currentHeight = noiseMap[x, y];
+        Texture2D[] terrainTextures = new Texture2D[mapWidth * mapHeight * textureSizeDPI];
 
-                for (int i = 0; i < regions.Length; i++) {
-                    if (currentHeight <= regions[i].height) {
-                        colorMap[y * mapWidth + x] = regions[i].color;
-                        break;
+        if (!createTileMap) {
+            for (int y = 0; y < mapHeight; y++) {
+                for (int x = 0; x < mapWidth; x++) {
+                    float currentHeight = noiseMap[x, y];
+
+                    for (int i = 0; i < regions.Length; i++) {
+                        if (currentHeight <= regions[i].height) {
+                            colorMap[y * mapWidth + x] = regions[i].color;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else if (createTileMap) {
+            // this is where we'll place the Texture2D that is in the "Terrain Tex" slot of the inspector for each region.
+            for (int y = 0; y < mapHeight; y++) {
+                for (int x = 0; x < mapWidth; x++) {
+                    float currentHeight = noiseMap[x, y];
+
+                    for (int i = 0; i < regions.Length; i++) {
+                        if (currentHeight <= regions[i].height) {
+                            colorMap[y * mapWidth + x] = regions[i].color;
+                            break;
+                        }
                     }
                 }
             }
         }
+        
 
         MapDisplay display = FindObjectOfType<MapDisplay>();
         if (drawMode == DrawMode.NoiseMap) {
@@ -64,9 +92,3 @@ public class MapGeneratorLague : MonoBehaviour {
     }
 }
 
-[System.Serializable]
-public struct TerrainType {
-    public string name;
-    public float height;
-    public Color color;
-}

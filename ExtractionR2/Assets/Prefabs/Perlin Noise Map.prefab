@@ -156,29 +156,36 @@ MonoBehaviour:
   drawMode: 1
   mapWidth: 16
   mapHeight: 16
-  noiseScale: 30
-  octaves: 4
-  persistance: 0.881
+  textureSizeDPI: 64
+  noiseScale: 4
+  octaves: 2
+  persistance: 0.553
   lacunarity: 1.85
   seed: 0
   offset: {x: 0, y: 0}
   autoUpdate: 1
+  createTileMap: 1
   regions:
   - name: Water
     height: 0.25
     color: {r: 0.3698097, g: 0.5218053, b: 0.88235295, a: 0}
+    terrainTex: {fileID: 0}
   - name: Dirt
     height: 0.35
     color: {r: 0.5955882, g: 0.4511007, b: 0.14013839, a: 0}
+    terrainTex: {fileID: 2800000, guid: 91b825c372f2d0a4491ec08804e5f2b8, type: 3}
   - name: Grass
     height: 0.55
     color: {r: 0.35452214, g: 0.7352941, b: 0.13516435, a: 0}
+    terrainTex: {fileID: 0}
   - name: Rocky
     height: 0.7
     color: {r: 0.6985294, g: 0.6480171, b: 0.5393058, a: 0}
+    terrainTex: {fileID: 2800000, guid: 6cdf1f5453f79864f96ff8bf0eb17d05, type: 3}
   - name: Mountain
     height: 0.85
     color: {r: 0.41176468, g: 0.41176468, b: 0.41176468, a: 0}
+    terrainTex: {fileID: 0}
 --- !u!114 &114364892138394066
 MonoBehaviour:
   m_ObjectHideFlags: 1

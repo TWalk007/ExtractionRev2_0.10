@@ -28,4 +28,21 @@ public static class TextureGenerator {
         return TextureFromColorMap(colorMap, width, height);
     }
 
+    /*  END LAGUE TUTORIAL______________________________________________________________________________________________________________
+    *
+    *   The following script will evaluate the Texture2D information that was generated above and apply the correct tiles for each quad.
+    */
+    public static Texture2D TileMapFromTexture(Color [,] textureColorMap, Texture2D tile) {
+
+        Debug.Log("Creating tile map from texture information...");
+
+        
+
+
+
+
+
+        return null;
+    }
+
 }

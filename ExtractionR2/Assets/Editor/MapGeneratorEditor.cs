@@ -16,5 +16,15 @@ public class MapGeneratorEditor : Editor {
         if(GUILayout.Button("Generate")) {
             mapGen.GenerateMap();
         }
+
+
+        /*  END LAGUE TUTORIAL________________________________________________________________________________________
+         *  
+         *  The following button calls the Texture Generator to evaluate the Texture2D color map info to create a tile map from it
+         */
+        //if (GUILayout.Button("Generate Tiles")) {
+        //    TextureGenerator.TileMapFromTexture();
+        //    Debug.Log("Generating Tile Map");
+        //}
     }
 }
