@@ -106,7 +106,7 @@ MonoBehaviour:
     width: 1920
     height: 1067
   m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MaxSize: {x: 18008, y: 14042}
   vertical: 1
   controlID: 9
 --- !u!114 &6
@@ -130,7 +130,7 @@ MonoBehaviour:
     width: 1920
     height: 1067
   m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
   controlID: 10
 --- !u!114 &7
@@ -154,7 +154,7 @@ MonoBehaviour:
     width: 1515
     height: 1067
   m_MinSize: {x: 406, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MaxSize: {x: 14006, y: 14042}
   vertical: 1
   controlID: 11
 --- !u!114 &8
@@ -199,8 +199,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 723
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -253,8 +253,8 @@ MonoBehaviour:
     y: 723
     width: 1515
     height: 344
-  m_MinSize: {x: 332, y: 271}
-  m_MaxSize: {x: 14002, y: 10021}
+  m_MinSize: {x: 336, y: 271}
+  m_MaxSize: {x: 14006, y: 10021}
   vertical: 0
   controlID: 122
 --- !u!114 &12
@@ -325,8 +325,8 @@ MonoBehaviour:
     y: 0
     width: 405
     height: 1067
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -606,19 +606,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Textures
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Textures
+  - Assets/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Local Project Files\Extraction R2\ExtractionRev2_0.10\ExtractionR2
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e0270000
-    m_LastClickedID: 10208
-    m_ExpandedIDs: 00000000b4270000e8270000062800002e28000000ca9a3bffffff7f
+    m_SelectedIDs: 86280000
+    m_LastClickedID: 10374
+    m_ExpandedIDs: 00000000b8270000f02700000e2800003628000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -646,7 +646,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b4270000e8270000062800002e280000
+    m_ExpandedIDs: 00000000b8270000f02700000e28000036280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

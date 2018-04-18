@@ -25,6 +25,8 @@ public class MapGeneratorLague : MonoBehaviour {
     public bool createTileMap;  // If this is checked it places the Texture2D that is in the "Terrain Tex" slot of each region.
 
     public TerrainType[] regions;
+    public Color[] SingleTileArray;
+
 
     [System.Serializable]
     public struct TerrainType {
@@ -55,6 +57,12 @@ public class MapGeneratorLague : MonoBehaviour {
             }
         } else if (createTileMap) {
             // this is where we'll place the Texture2D that is in the "Terrain Tex" slot of the inspector for each region.
+            // First, we need to store each of the Texture2D pixel info into an array.
+
+            //TESTING ONLY///////////////////////////////////////////
+            TileToPixels(regions[1].terrainTex);
+
+
             for (int y = 0; y < mapHeight; y++) {
                 for (int x = 0; x < mapWidth; x++) {
                     float currentHeight = noiseMap[x, y];
@@ -78,6 +86,30 @@ public class MapGeneratorLague : MonoBehaviour {
         }
         
     }
+
+    // TileToPixels () is a method that will use a specified Texture2D from the regions [] and use it to populate a color array.
+    // We will use this data later to populate a single tile on the larger texture map (our tile map).
+    private Color[] TileToPixels (Texture2D tileTex) {
+        Color[] singleTilePixels = new Color[textureSizeDPI^2];
+
+        for (int y = 0; y < textureSizeDPI; y++) {
+            for (int x = 0; x < textureSizeDPI; x++) {
+
+                float currentHeight = tileTex.GetPixel(x,y).grayscale;
+
+                singleTilePixels[y * textureSizeDPI + x] = tileTex.GetPixel(x,y);
+
+                Debug.Log(singleTilePixels);
+                break;
+                
+            }
+        }
+
+
+        return singleTilePixels;
+    }
+
+
 
     private void OnValidate() { //called automatically whenever one of the scripts variables change in the inspector.
         if (mapWidth < 1) {
