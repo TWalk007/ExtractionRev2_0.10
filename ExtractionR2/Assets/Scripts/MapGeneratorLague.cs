@@ -14,7 +14,7 @@ public class MapGeneratorLague : MonoBehaviour {
     [Range(1, 25)]
     public int octaves;
 
-    [Range(0,1)]
+    [Range(0, 1)]
     public float persistance;
     public float lacunarity;
 
@@ -25,8 +25,6 @@ public class MapGeneratorLague : MonoBehaviour {
     public bool createTileMap;  // If this is checked it places the Texture2D that is in the "Terrain Tex" slot of each region.
 
     public TerrainType[] regions;
-    public Color[] SingleTileArray;
-
 
     [System.Serializable]
     public struct TerrainType {
@@ -40,7 +38,7 @@ public class MapGeneratorLague : MonoBehaviour {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
         Color[] colorMap = new Color[mapWidth * mapHeight];
-        Texture2D[] terrainTextures = new Texture2D[mapWidth * mapHeight * textureSizeDPI];
+        Color[][] terrainTextures = new Color[mapWidth * mapHeight][];
 
         if (!createTileMap) {
             for (int y = 0; y < mapHeight; y++) {
@@ -59,9 +57,9 @@ public class MapGeneratorLague : MonoBehaviour {
             // this is where we'll place the Texture2D that is in the "Terrain Tex" slot of the inspector for each region.
             // First, we need to store each of the Texture2D pixel info into an array.
 
-            Color[] texMap = new Color[textureSizeDPI ^ 2];
-            texMap = regions[1].terrainTex.GetPixels();
-            Debug.Log(texMap[5]);
+            //Color[] texMap = new Color[textureSizeDPI ^ 2];
+            //texMap = regions[1].terrainTex.GetPixels();
+            //Debug.Log(texMap[5]);
 
             //  The values have correctly been store in the color array!!!  Woot!!
             //  Now I just need apply this color[] data (texMap) to the correct spot in the colorMap above.
@@ -69,29 +67,31 @@ public class MapGeneratorLague : MonoBehaviour {
 
             for (int y = 0; y < mapHeight; y++) { // we don't " * texureSizeDPI " here because we are indexing based upon the noise map.  We add that further down to accommodate the larger size.
                 for (int x = 0; x < mapWidth; x++) {
-                    for (int i = 0; i < regions.Length; i++) {
-                        // Below means "current pixel within the noise map.  This is relevant because we are using this pixel as our whole tile).  one tile per pixel.
-                        float currentHeight = noiseMap[x, y];
+                    // Below means "current pixel within the noise map.  This is relevant because we are using this pixel as our whole tile).  one tile per pixel.
+                    float currentHeight = noiseMap[x, y];
 
-                        // Then for each tile, we will add the terrain's texture data to the new terrainTextures array (our Texture2D).
+                    for (int i = 0; i < regions.Length; i++) {
                         if (regions[i].terrainTex == null) {
                             Debug.Log(regions[i].name + " is missing a terrain texture!");
                         } else if (regions[i].terrainTex != null) {
+                            /* This is where I need to place the texMap array into the correct index of the terrainTextures array.
+                            I need to make sure if it's the first slot of the terrainTextures array it goes to terrainTextures[0], otherwise
+                            it should just be an "array.add".  The problem with this is that it will add arrays into the slots of where
+                            any missing arrays should go.So...it would be better to insert the texMap array into the correct index instead
+                            of just doing an array.add.Not sure yet how to do this.
+                            */
 
-                        /* This is where I need to place the texMap array into the correct index of the terrainTextures array.
-                        I need to make sure if it's the first slot of the terrainTextures array it goes to terrainTextures[0], otherwise
-                        it should just be an "array.add".  The problem with this is that it will add arrays into the slots of where
-                        any missing arrays should go.So...it would be better to insert the texMap array into the correct index instead
-                        of just doing an array.add.Not sure yet how to do this.
-                        */
-                            //terrainTextures[y * textureSizeDPI + x] = texMap; ;
+                            Color[] tileTemp = TileToPixels(regions[i].terrainTex);
+
+
+                            terrainTextures[y * mapWidth + x] = tileTemp[];
                             break;
-                        }                           
-                    }                    
+                        }
+                    }
                 }
             }
         }
-        
+
 
         MapDisplay display = FindObjectOfType<MapDisplay>();
         if (drawMode == DrawMode.NoiseMap) {
@@ -99,12 +99,28 @@ public class MapGeneratorLague : MonoBehaviour {
         } else if (drawMode == DrawMode.ColorMap) {
             display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         }
-        
+
     }
 
     // TileToPixels () is a method that will use a specified Texture2D from the regions [] and use it to populate a color array.
     // We will use this data later to populate a single tile on the larger texture map (our tile map).
 
+    private Color[] TileToPixels (Texture2D tileTex){
+        // **"Color" is a float between 0 and 1.  "Color32" is an integer 0 to 255.
+        Color[] texMap = tileTex.GetPixels();
+        int pixelCount = texMap.Length;
+        float r = 0, g = 0, b = 0, a = 0;
+        Color c = new Color(0, 0, 0, 0);
+
+        for (int z = 0; z <= pixelCount; z++) {
+            c = texMap[z];
+            r += c.r;
+            g += c.g;
+            b += c.b;
+            a += c.a;
+        }        
+        return texMap;
+    }
 
 
     private void OnValidate() { //called automatically whenever one of the scripts variables change in the inspector.
