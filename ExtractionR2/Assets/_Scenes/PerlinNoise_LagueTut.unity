@@ -152,6 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114261572736796734, guid: 40eb81fd8db67904284a588100d0489b,
+        type: 2}
+      propertyPath: createTileMap
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40eb81fd8db67904284a588100d0489b, type: 2}
   m_IsPrefabParent: 0
